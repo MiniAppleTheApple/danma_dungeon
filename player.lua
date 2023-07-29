@@ -1,17 +1,15 @@
-local Player = {
-    width = 32,
-    height = 32,
-}
+local Player = {}
 
 local SPEED = 200
 Player.__index = Player
 
-function Player.new(player)
+function Player.new(player, world)
+    player.collider:setObject(self)
     return setmetatable(player, Player)
 end
 
 function Player:draw()
-    love.graphics.rectangle('fill', self.collider:getX() - Player.width / 2, self.collider:getY() - Player.height / 2, Player.width, Player.height)
+    love.graphics.rectangle('fill', self.collider:getX() - self.width / 2, self.collider:getY() - self.height / 2, self.width, self.height, self.collider:getAngle())
 end
 
 function Player:update(dt)
